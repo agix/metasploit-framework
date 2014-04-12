@@ -14,3 +14,6 @@
 start:                   ;
   pop ebp                ; pop off the address of 'api_call' for calling later.
 %include "./src/block/block_create_remote_process.asm"
+push 0x00000000
+push 0x56A2B5F0
+call ebp    ;call ExitProcess(0)

