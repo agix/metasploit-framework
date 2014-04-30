@@ -12,5 +12,6 @@
   call start             ; Call start, this pushes the address of 'api_call' onto the stack.
 %include "./src/block/block_api.asm"
 start:                   ;
+
   pop ebp                ; pop off the address of 'api_call' for calling later.
 %include "./src/block/block_drop_file_execute.asm"
